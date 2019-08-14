@@ -1,0 +1,23 @@
+server:
+  port: 8763 #服务端口
+
+spring:
+  application:
+    name: config #实例名称
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://git.coding.net/dingxw/lsq-config-repository.git  #配置文件Git地址
+          username: opqding        #git用户名
+          password: 123456Qa       #git密码
+# 注册中心配置
+eureka:
+  instance:
+    prefer-ip-address: true #ip注册
+    instanceId: ${spring.cloud.client.ip-address}:${server.port} #ip显示
+    lease-renewal-interval-in-seconds: 10 #租期更新时间间隔
+    lease-expiration-duration-in-seconds: 10 #租期到期时间
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

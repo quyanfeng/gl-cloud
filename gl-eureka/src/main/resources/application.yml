@@ -1,0 +1,18 @@
+#端口
+server:
+  port: 8761
+
+#注册中心禁止注册
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    serviceUrl:
+        defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    server:
+      #(设置为false表示，一个服务没有发送心跳，则删掉)自我保护模式，当出现出现网络分区、eureka在短时间内丢失过多客户端时，会进入自我保护模式，即一个服务长时间没有发送心跳，eureka也不会将其删除，默认为true
+      enable-self-preservation: false
+      #清理间隔（单位毫秒，默认是60*1000）
+      eviction-interval-timer-in-ms: 10000

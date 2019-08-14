@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #通过服务实例名直接转发路径
+#          lowerCaseServiceId: true #
+      routes:
+      - id: qq
+        uri: lb://geek-user
+        predicates:
+        - Path=/user/**
+        filters:
+        - StripPrefix=1 #转发后路径去掉、/user
+eureka:
+  instance:
+    prefer-ip-address: true #ip注册
+    instanceId: ${spring.cloud.client.ip-address}:${server.port} #ip显示
+    lease-renewal-interval-in-seconds: 10 #租期更新时间间隔
+    lease-expiration-duration-in-seconds: 10 #租期到期时间
+    appname: gateway
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+server:
+  port: 8762
