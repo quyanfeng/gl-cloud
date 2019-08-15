@@ -13,6 +13,22 @@ spring:
         - Path=/user/**
         filters:
         - StripPrefix=1 #转发后路径去掉、/user
+        # 熔断降级配置
+        - name: Hystrix
+          args:
+            name : default
+            fallbackUri: 'forward:/defaultfallback'
+
+        # hystrix 信号量隔离，2秒后自动超时
+        hystrix:
+          command:
+            default:
+              execution:
+                isolation:
+                  strategy: SEMAPHORE
+                  thread:
+                    timeoutInMilliseconds: 2000
+          shareSecurityContext: true
 eureka:
   instance:
     prefer-ip-address: true #ip注册
@@ -25,3 +41,5 @@ eureka:
       defaultZone: http://127.0.0.1:8761/eureka/
 server:
   port: 8762
+
+
