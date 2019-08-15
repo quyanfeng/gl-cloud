@@ -31,7 +31,7 @@ public class UserApplication {
     @GetMapping("/from")
     @ResponseBody
     public String returnFormValue() throws InterruptedException {
-//        Thread.sleep(3000);
+        Thread.sleep(3000);
         return fromValue;
     }
 
