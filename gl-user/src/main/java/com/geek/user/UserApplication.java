@@ -31,6 +31,7 @@ public class UserApplication {
     @GetMapping("/from")
     @ResponseBody
     public String returnFormValue(){
+
         return fromValue;
     }
 

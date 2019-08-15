@@ -6,9 +6,8 @@ spring:
       discovery:
         locator:
           enabled: true #通过服务实例名直接转发路径
-#          lowerCaseServiceId: true #
       routes:
-      - id: qq
+      - id: user
         uri: lb://geek-user
         predicates:
         - Path=/user/**
